@@ -2,7 +2,7 @@
 
 use std::sync::Arc;
 
-use notify::{FsEventWatcher, RecursiveMode};
+use notify::{RecommendedWatcher, RecursiveMode};
 use tokio::sync::watch;
 use tokio_stream::Stream;
 
@@ -45,7 +45,7 @@ use crate::traits::FromReader;
 #[must_use = "Dropping the `Reloading` will cancel the file watch"]
 pub struct Reloading<T> {
     reload_rx: watch::Receiver<T>,
-    _watcher: Arc<FsEventWatcher>,
+    _watcher: Arc<RecommendedWatcher>,
 }
 
 impl<T: Clone> Reloading<T> {
